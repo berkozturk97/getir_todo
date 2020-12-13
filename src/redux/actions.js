@@ -7,6 +7,8 @@ export const FETCH_TODO_SUCCESS = "FETCH_TODO_SUCCESS";
 export const FETCH_TODO_FAIL = "FETCH_TODO_FAIL";
 export const FETCH_TODO_REQUEST = "FETCH_TODO_REQUEST";
 export const SET_IS_LOADING = "SET_IS_LOADING";
+export const IS_VISIBLE_MODAL = "IS_VISIBLE_MODAL";
+export const SELECT_OBJECT = "SELECT_OBJECT";
 
 
 export function addTodo(todo) {
@@ -58,6 +60,20 @@ export function fetchTodoRequest(todo) {
     }
 }
 
+export function visibleModal(isVisibleModal) {
+    return {
+        type: IS_VISIBLE_MODAL,
+        payload: isVisibleModal,
+    }
+}
+
+export function selectObject(selectedObject) {
+    return {
+        type: SELECT_OBJECT,
+        payload: selectedObject,
+    }
+}
+
 export function addNewTodo({body = null}) {
     
     return (dispatch) => {
@@ -101,7 +117,6 @@ export function getTodo() {
     }
 
 }
-
 
 export function updateTodos({body = null}) {
     return (dispatch) => {

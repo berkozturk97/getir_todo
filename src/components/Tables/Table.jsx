@@ -9,10 +9,11 @@ function Table({columnId, column, index}) {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            
           }}
           key={columnId}
         >
-          <h2>{column.name}</h2>
+          <h2 style={{color: "#FFD00C"}}>{column.name}</h2>
           <div style={{ margin: 8 }}>
             <Droppable droppableId={columnId} key={columnId}>
               {(provided, snapshot) => {
@@ -21,9 +22,10 @@ function Table({columnId, column, index}) {
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                     style={{
+                      borderRadius: 8,
                       background: snapshot.isDraggingOver
-                        ? "lightblue"
-                        : "lightgrey",
+                        ? "#FFF0B3"
+                        : "white",
                       padding: 4,
                       width: 250,
                       minHeight: 500,

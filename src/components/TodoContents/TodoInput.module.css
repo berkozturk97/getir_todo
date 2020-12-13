@@ -1,0 +1,21 @@
+.container{
+    margin: 50px;
+}
+.title{
+    color: #FFD00C;
+}
+.form{
+    border: 2px solid #432d86;
+    padding-left: 10px;
+    border-radius: 4px;
+    width: 200px;
+    height: 30px;
+    margin: 0px 20px 0px;
+    outline: none;
+}
+.button{
+    height: 35px;
+    border-radius: 4px;
+    width: 70px;
+    border: 2px solid #432d86;
+}

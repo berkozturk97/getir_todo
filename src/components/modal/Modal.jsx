@@ -1,41 +1,54 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { visibleModal } from "../../redux/actions";
+import styles from "./Modal.module.css";
+import moment from 'moment';
 
 function Modal() {
-    const [title, setTitle] = useState();
-    const [desc, setDesc] = useState();
+  let visible = useSelector((state) => state);
+  let dispatch = useDispatch();
 
-    const handleSubmit = (e) => {
-        const body = {title, desc, status: 0};
-        e.preventDefault();
-        // dispatch(addNewTodo({body}));
-        setDesc('');
-        setTitle('');
-      }
+  function convertTime() {
+    return moment(visible.selectedObject.createdAt).utc().format('DD-MM-YYYY / HH:mm:ss');
+  }
 
-  return (
-    <div>
-      <h3>Edit Todo</h3>
-      <div className="row m-2 align-items-center">
-        <form onSubmit={handleSubmit}>
-          <input
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="Title"
-            value={title}
-            type="text"
-            className="form-control"
-          />
-          <input
-            onChange={(e) => setDesc(e.target.value)}
-            placeholder="Description"
-            value={desc}
-            type="text"
-            className="form-control"
-          />
-          <input type="submit" value="Add" />
-        </form>
+  if (visible.isVisibleModal === true) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.innerContainer}>
+          <span
+            className={styles.close}
+            onClick={() => dispatch(visibleModal(false))}
+            aria-hidden="true"
+          >
+            &times;
+          </span>
+          <h3>{visible.selectedObject.title}</h3>
+          <h4 className={styles.desc}>• {visible.selectedObject.desc}</h4>
+          <h5 className={styles.time}>{convertTime()}</h5>
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return <div></div>;
+  }
 }
 
 export default Modal;
+
+{
+  /* <div className="modal-header">
+<h5
+    className="modal-title"
+>{visible.selectedObject.title}</h5>
+<button type="button" className="close" aria-label="Close" onClick={() => dispatch(visibleModal(false))}>
+    <span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div className={}>
+<p style={{backgroundColor: "white"}}>{visible.selectedObject.desc}</p>
+</div>
+<div className="modal-footer">
+<button type="button" className="btn btn-secondary" onClick={() => dispatch(visibleModal(false))}>close</button>
+</div> */
+}

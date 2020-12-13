@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addNewTodo } from "../redux/actions";
+import { addNewTodo } from "../../redux/actions";
+
+import styles from './TodoInput.module.css'
 
 function TodoInput() {
   const [title, setTitle] = useState();
@@ -19,25 +21,26 @@ function TodoInput() {
 
 
   return (
-    <div>
-      <h3>Add New Todo</h3>
-      <div className="row m-2 align-items-center">
+    <div className={styles.container}>
+      <h3 className={styles.title}>Add New Todo</h3>
+      <div>
         <form onSubmit={handleSubmit}>
           <input
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Title"
             value={title}
             type="text"
-            className="form-control"
+            className={styles.form}
           />
           <input
             onChange={(e) => setDesc(e.target.value)}
             placeholder="Description"
             value={desc}
             type="text"
-            className="form-control"
+            className={styles.form}
           />
           <input
+            className={styles.button}
             type="submit"
             value="Add"
           />

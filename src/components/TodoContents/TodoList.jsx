@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import { DragDropContext} from "react-beautiful-dnd";
 
 import { useDispatch, useSelector } from "react-redux";
-import useStateCallback from "../hook/useStateCallback";
-import { setIsLoading, updateTodo, updateTodos } from "../redux/actions";
-import Modal from "./modal/Modal";
-import Table from "./Table";
+import useStateCallback from "../../hook/useStateCallback";
+import { setIsLoading, updateTodo, updateTodos } from "../../redux/actions";
+import Table from "../Tables/Table";
+
+import styles from './TodoList.module.css';
 
 function TodoList() {
   const [columns, setColumns] = useStateCallback({});
@@ -38,7 +39,7 @@ function TodoList() {
   function renderData2() {
     return (
       <div
-        style={{ display: "flex", justifyContent: "center", height: "100%" }}
+        className={styles.container}
       >
         <DragDropContext
           onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
@@ -69,11 +70,12 @@ function TodoList() {
       const destColumn = columns[destination.droppableId];
       const sourceItems = [...sourceColumn.items];
       const destItems = [...destColumn.items];
+      console.log(destination.index);
+
       const [removed] = sourceItems.splice(source.index, 1);
       destItems.splice(destination.index, 0, removed);
       dispatch(updateTodos({ body }));
-    //   console.log('a', destItems[destItems.length - 1])
-      destItems[destItems.length - 1] = body;
+      destItems[destination.index] = body;
       setColumns(
         {
           ...columns,
