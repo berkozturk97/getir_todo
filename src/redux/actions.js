@@ -11,6 +11,7 @@ export const IS_VISIBLE_MODAL = "IS_VISIBLE_MODAL";
 export const SELECT_OBJECT = "SELECT_OBJECT";
 
 
+
 export function addTodo(todo) {
     return {
         type: ADD_TODO,
@@ -25,10 +26,10 @@ export function updateTodo(todo,inProgress,done) {
     }
 }
 
-export function deleteTodo(todoId) {
+export function deleteTodo(list,deletedIndex) {
     return {
         type: DELETE_TODO,
-        payload: todoId,
+        payload: {list, deletedIndex}
     }
 }
 
@@ -124,6 +125,21 @@ export function updateTodos({body = null}) {
         axios.put('https://filterio.herokuapp.com/todo/updateTodos', body)
             .then(response => {
                 
+            })
+            .catch(error => {
+                const errorMsg = error.message;
+            })
+    }
+
+}
+
+export function removeTodo({body = null,list,deletedIndex}) {
+    return (dispatch) => {
+        dispatch(fetchTodoRequest);   
+        axios.put('https://filterio.herokuapp.com/todo/deleteTodo', body)
+            .then(response => {
+                dispatch(deleteTodo(list,deletedIndex))
+                dispatch(setIsLoading(false));
             })
             .catch(error => {
                 const errorMsg = error.message;

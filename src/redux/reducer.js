@@ -54,9 +54,13 @@ export let reducer = (state = initialState, action) => {
                 }
 
             case DELETE_TODO:
-                    newTodos = [...state];
-                    newTodos = newTodos.filter(todo => todo.id !== action.payload);
-                    return newTodos;
+                    newTodos = state[action.payload.list]
+                    newTodos = newTodos.filter((todo,index) => index !== action.payload.deletedIndex);
+                    return {
+                        ...state,
+                        isLoading: true,
+                        [action.payload.list]: newTodos,
+                    }
 
             case SET_IS_LOADING:
                 return {

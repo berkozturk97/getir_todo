@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { DragDropContext} from "react-beautiful-dnd";
+import TableConstants from '../../constants/TableConstants';
 
 import { useDispatch, useSelector } from "react-redux";
 import useStateCallback from "../../hook/useStateCallback";
@@ -20,15 +21,15 @@ function TodoList() {
     const doneFromBackend = todos.done;
 
     setColumns({
-      0: {
+      [TableConstants.TODO_LIST]: {
         name: "To do",
         items: todoFromBackend,
       },
-      1: {
+      [TableConstants.IN_PROGRESS_LIST]: {
         name: "In Progress",
         items: inProgressFromBackend,
       },
-      2: {
+      [TableConstants.DONE_LIST]: {
         name: "Done",
         items: doneFromBackend,
       },

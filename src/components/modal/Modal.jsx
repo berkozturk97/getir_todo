@@ -1,15 +1,28 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { visibleModal } from "../../redux/actions";
-import styles from "./Modal.module.css";
+import React from "react";
 import moment from 'moment';
+
+import { useDispatch, useSelector } from "react-redux";
+import { removeTodo, visibleModal } from "../../redux/actions";
+import { getTableNameByStatus } from "../../utils/functions/table";
+
+import styles from "./Modal.module.css";
 
 function Modal() {
   let visible = useSelector((state) => state);
   let dispatch = useDispatch();
+  const { item, index } = visible.selectedObject;
 
   function convertTime() {
-    return moment(visible.selectedObject.createdAt).utc().format('DD-MM-YYYY / HH:mm:ss');
+    return moment(item.createdAt).utc().format('DD-MM-YYYY / HH:mm:ss');
+  }
+
+  function deleteItem() {
+      const body = {_id: item._id};
+
+      let list = getTableNameByStatus(item.status);
+      
+      dispatch(removeTodo({body,list,deletedIndex: index}));
+      dispatch(visibleModal(false));
   }
 
   if (visible.isVisibleModal === true) {
@@ -23,9 +36,10 @@ function Modal() {
           >
             &times;
           </span>
-          <h3>{visible.selectedObject.title}</h3>
-          <h4 className={styles.desc}>• {visible.selectedObject.desc}</h4>
+          <h3>{item.title}</h3>
+          <h4 className={styles.desc}><span style={{color: "#4F34A3"}}>•</span> {item.desc}</h4>
           <h5 className={styles.time}>{convertTime()}</h5>
+          <i onClick={deleteItem} class="fas fa-trash-alt fa-2x"></i>
         </div>
       </div>
     );

@@ -7,7 +7,7 @@ function TableContent({ item, index }) {
   let dispatch = useDispatch();
 
   const openModal = () => {
-    dispatch(selectObject(item));
+    dispatch(selectObject({item, index}));
     dispatch(visibleModal(true));
   };
 

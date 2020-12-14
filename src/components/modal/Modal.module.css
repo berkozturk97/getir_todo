@@ -11,13 +11,14 @@
     justify-content: center;
 }
 .innerContainer{
+
     position: relative;
-    width: 500px;
-    height: 300px;
+    width: 400px;
+    height: 500px;
     border-radius: 10px;
     background-color: white;
     border: 2px solid #4F34A3;
-    padding: 2px, 4px, 3px;
+    padding: 13px;
 }
 .close{
     right: 0;
@@ -34,9 +35,16 @@
 }
 
 .time{
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    margin-left: 15px;
+    color: gray;
+}
+i{
+    color: red;
     right: 0;
     bottom: 0;
     position: absolute;
-    margin-right: 5px;
-    color: gray;
-} 
+    margin: 18px;
+}
