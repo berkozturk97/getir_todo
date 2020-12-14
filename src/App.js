@@ -4,7 +4,7 @@ import TodoList from './components/TodoContents/TodoList';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTodo } from './redux/actions';
-import Modal from './components/Modal/Modal'
+import Modal from './components/modal/Modal'
 import Loading from './components/Loading/Loading';
 
 function App() {
