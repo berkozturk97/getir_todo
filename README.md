@@ -5,6 +5,6 @@
 ## Screenshots
 
 
-![GitHub Logo](/images/1.png)
-![GitHub Logo](/images/2.png)
-![GitHub Logo](/images/3.png)
+![GitHub Logo](/screenshot/1.png)
+![GitHub Logo](/screenshot/2.png)
+![GitHub Logo](/screenshot/3.png)
